@@ -13,17 +13,11 @@ function gitext_add \
     set file_id 0
     for entry in $files
         set file_id (math $file_id + 1)
-        set entry (string split -n -m 1 " " "$entry")
+        set entry (string split -n -m 1 " " (string trim "$entry"))
         set filenames_list $filenames_list "$entry[2]"
 
         echo "$file_id: $entry[2] ($entry[1])"
     end
-
-    echo ""
-    echo "Input options:"
-    echo " - Type 'q' to quit"
-    echo " - Type 'a' to add all files"
-    echo " - Type a list of IDs or ID ranges (e.g.: '1 2 6-10')"
 
     read -P "Add file(s): " id_list_expr
     if test $id_list_expr = "q" -o -z $id_list_expr
