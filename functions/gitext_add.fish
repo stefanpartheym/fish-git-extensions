@@ -14,9 +14,10 @@ function gitext_add \
     for entry in $files
         set file_id (math $file_id + 1)
         set entry (string split -n -m 1 " " (string trim "$entry"))
-        set filenames_list $filenames_list "$entry[2]"
+        set filename (string trim "$entry[2]")
+        set filenames_list $filenames_list "$filename"
 
-        echo "$file_id: $entry[2] ($entry[1])"
+        echo "$file_id: $filename ($entry[1])"
     end
 
     read -P "Add file(s): " id_list_expr
