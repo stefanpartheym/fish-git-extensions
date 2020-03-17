@@ -21,11 +21,3 @@ function _gitext_workflow
     git push
     git checkout $source
 end
-
-function gitext_stage
-    _gitext_workflow "Staging" "develop" "staging"
-end
-
-function gitext_release
-    _gitext_workflow "Release" "staging" "master"
-end
