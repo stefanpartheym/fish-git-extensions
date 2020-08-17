@@ -12,12 +12,15 @@ function gitext_add \
 
     set file_id 0
     for entry in $files
-        set file_id (math $file_id + 1)
-        set entry (string split -n -m 1 " " (string trim "$entry"))
-        set filename (string trim "$entry[2]")
-        set filenames_list $filenames_list "$filename"
+        # ignore already staged files
+        if test (string sub -s 2 -l 1 $entry) != " "
+            set file_id (math $file_id + 1)
+            set entry (string split -n -m 1 " " (string trim "$entry"))
+            set filename (string trim "$entry[2]")
+            set filenames_list $filenames_list "$filename"
 
-        echo "$file_id: $filename ($entry[1])"
+            echo "$file_id: $filename ($entry[1])"
+        end
     end
 
     read -P "Add file(s): " id_list_expr
