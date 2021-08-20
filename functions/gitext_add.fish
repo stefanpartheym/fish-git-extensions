@@ -17,9 +17,10 @@ function gitext_add \
             set file_id (math $file_id + 1)
             set entry (string split -n -m 1 " " (string trim "$entry"))
             set filename (string trim "$entry[2]")
-            set filenames_list $filenames_list "$filename"
+            set normalized_filename (string replace -a '"' '' "$filename")
+            set filenames_list $filenames_list "$normalized_filename"
 
-            echo "$file_id: $filename ($entry[1])"
+            echo "$file_id: $normalized_filename ($entry[1])"
         end
     end
 
