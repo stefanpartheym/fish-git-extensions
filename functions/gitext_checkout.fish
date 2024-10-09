@@ -7,7 +7,7 @@ function gitext_checkout \
         return 1
     end
 
-    if type -q fzf > /dev/null
+    if type -q fzf
         set selection (git branch | grep -v "^\*" | fzf --height=20% --reverse --info=inline)
         if test -z "$selection"
             echo "No branch selected."
