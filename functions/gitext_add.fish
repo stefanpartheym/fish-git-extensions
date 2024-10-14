@@ -13,8 +13,8 @@ function gitext_add \
     if type -q fzf
         set selection ( \
             git status --short | \
+            cut -c 3- | \
             string trim | \
-            cut -d ' ' -f 2 | \
             fzf -m \
                 --bind 'ctrl-a:select-all' \
                 --bind 'ctrl-x:deselect-all' \
