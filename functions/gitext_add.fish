@@ -11,10 +11,18 @@ function gitext_add \
     end
 
     if type -q fzf
+        set list
+        for entry in $files
+            set status_col1 (echo $entry | cut -c 1)
+            set status_col2 (echo $entry | cut -c 2)
+            if test $status_col1 = " " -o $status_col2 != " "
+                set list $list (echo $entry | cut -c 3- | string trim)
+            end
+        end
+
         set selection ( \
-            git status --short | \
-            cut -c 3- | \
-            string trim | \
+            echo $list | \
+            tr ' ' '\n' | \
             fzf -m \
                 --bind 'ctrl-a:select-all' \
                 --bind 'ctrl-x:deselect-all' \
